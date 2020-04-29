@@ -1,16 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -33,6 +24,18 @@ namespace RadarrApp.Views
         {
             base.OnNavigatedTo(e);
             movie = (RadarrSharp.Models.Movie)e.Parameter;
+
+            //ImageBrush myBrush = new ImageBrush();
+            //Image image = new Image();
+            //image.Source = new BitmapImage(new Uri(movie.Images[1].Url));
+            //myBrush.ImageSource = image.Source;
+            //MovieInfo.Background = myBrush;
+            //MovieInfo.BackgroundSizing = BackgroundSizing.OuterBorderEdge;
+        }
+
+        public string GetMovieDownloadedStatus()
+        {
+            return (movie.Downloaded ? "Downloaded" : "Not downloaded");
         }
     }
 }
