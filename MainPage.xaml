@@ -12,6 +12,8 @@
         <NavigationView Background="{ThemeResource SystemControlAcrylicWindowBrush}" Name="NavView" SelectionChanged="NavigationView_SelectionChanged" BackRequested="NavView_BackRequested" IsBackEnabled="True">
             <NavigationView.MenuItems>
                 <NavigationViewItem Icon="Video" Content="Movies" Tag="Movie_Page" />
+                <NavigationViewItem Icon="Download" Content="Queue" Tag="Queue_Page" />
+                <NavigationViewItem Icon="Accept" Content="Status" Tag="Status_Page" />
             </NavigationView.MenuItems>
             <Frame x:Name="contentFrame"></Frame>
         </NavigationView>

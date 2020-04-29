@@ -20,6 +20,6 @@
             <TextBlock Text="{ x:Bind GetMovieDownloadedStatus() }" FontSize="16" Margin="20,0,0,0"></TextBlock>
         </StackPanel>
         <TextBlock RelativePanel.Below="MovieYear" Margin="40,40,0,0" Text="{x:Bind movie.Overview }" MaxWidth="1280" TextWrapping="WrapWholeWords"/>
-
+        
     </RelativePanel>
 </Page>
