@@ -10,7 +10,7 @@
 
     <Grid>
         <TextBlock HorizontalAlignment="Left" Margin="40,40,0,0" FontSize="36" Text="Welcome to RadarrApp" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="40,127,0,0" Text="Visit the settings page (bottom left) to get yourself set up." TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="40,127,0,0" Text="Visit the settings page (bottom left) to set up your app." TextWrapping="Wrap" VerticalAlignment="Top"/>
 
     </Grid>
 </Page>

@@ -7,36 +7,36 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource SystemControlAcrylicWindowBrush}">
 
     <Grid>
         <ProgressRing Name="progressRing" Height="80" Width="97" IsActive="True"/>
         <RelativePanel>
             <TextBlock x:Name="PageTitle" HorizontalAlignment="Left" Margin="40,40,0,0" FontSize="36" Text="Queue" TextWrapping="Wrap" VerticalAlignment="Top"/>
-            <GridView
-                x:Name="StyledGrid">
-
-                <GridView.ItemContainerStyle>
-                    <Style TargetType="GridViewItem">
-                        <Setter Property="Margin" Value="5, 5, 5, 5"/>
-                    </Style>
-                </GridView.ItemContainerStyle>
-
-                <DataTemplate x:Name="ImageOverlayTemplate" x:DataType="local1:Movie">
-                    <Grid Width="100">
-                        <Image Source="{x:Bind ImageLocation}" Stretch="UniformToFill"/>
-                        <StackPanel Orientation="Vertical" Height="40" VerticalAlignment="Bottom" Padding="5,1,5,1" 
-                    Background="LightGray" Opacity=".75">
-                            <TextBlock Text="{x:Bind Title}"/>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{x:Bind Likes}" Style="{ThemeResource CaptionTextBlockStyle}" 
+            <GridView 
+            x:Name="ContentGridView"
+            IsItemClickEnabled="False"
+            CanDragItems="False"
+            AllowDrop="False"
+            CanReorderItems="False"
+            SelectionMode="Single" 
+            FlowDirection="LeftToRight" 
+            Margin="40,121,0,0">
+                <GridView.ItemTemplate>
+                    <DataTemplate x:DataType="local1:Queue">
+                        <StackPanel>
+                            <Image Source="{x:Bind Movie.Images[0].Url}" Stretch="UniformToFill" Width="167" Height="250"/>
+                            <StackPanel Orientation="Vertical" Height="60" VerticalAlignment="Bottom" Padding="5,1,5,1" 
+                    Background="Gray" Opacity=".85">
+                                <TextBlock Text="{x:Bind Movie.Title}" FontSize="16"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{x:Bind Status}" Style="{ThemeResource CaptionTextBlockStyle}" 
                            Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
-                                <TextBlock Text=" Likes" Style="{ThemeResource CaptionTextBlockStyle}" 
-                           Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
+                                </StackPanel>
                             </StackPanel>
-                        </StackPanel>
-                    </Grid>
-                </DataTemplate>
+                        </StackPanel>                        
+                    </DataTemplate>
+                </GridView.ItemTemplate>
             </GridView>
         </RelativePanel>
     </Grid>

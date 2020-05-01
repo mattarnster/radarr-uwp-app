@@ -4,10 +4,15 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:RadarrApp.Views"
     xmlns:local1="using:RadarrSharp.Models"
+    xmlns:local2="using:RadarrApp.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource SystemControlAcrylicWindowBrush}">
+
+    <UserControl.Resources>
+        <local2:MovieIsAvailableConverter x:Key="IsAvailableConverter"/>
+    </UserControl.Resources>
 
     <Grid>
         <TextBlock HorizontalAlignment="Left" Margin="40,40,0,0" FontSize="36" Text="Movies" TextWrapping="Wrap" VerticalAlignment="Top"/>
@@ -23,10 +28,22 @@
             Margin="40,121,0,0"
             ItemClick="ContentGridView_ItemClick">
             <GridView.ItemTemplate>
-                <DataTemplate x:DataType="local1:Movie">
+                <DataTemplate x:Name="MovieTemplate" x:DataType="local1:Movie">
                     <StackPanel>
                         <Image Stretch="UniformToFill" Source="{x:Bind Images[0].Url}" Width="167" Height="250" Margin="0,4,0,0"/>
-                        <TextBlock Text="{x:Bind Title}" TextTrimming="WordEllipsis"/>
+                        <StackPanel Orientation="Vertical" Height="60" VerticalAlignment="Bottom" Padding="5,1,5,1" Background="Gray" Opacity=".85">
+                            <TextBlock Text="{x:Bind Title}" 
+                                       FontSize="16" 
+                                       TextTrimming="WordEllipsis"/>
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="{x:Bind Status}" 
+                                       Style="{ThemeResource CaptionTextBlockStyle}" 
+                                       Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
+                                <TextBlock Text="{x:Bind Downloaded, Converter={StaticResource IsAvailableConverter}}" 
+                                           Style="{ThemeResource CaptionTextBlockStyle}" 
+                                           Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
+                            </StackPanel>
+                        </StackPanel>
                     </StackPanel>
                 </DataTemplate>
             </GridView.ItemTemplate>

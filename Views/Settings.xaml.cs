@@ -29,16 +29,52 @@ namespace RadarrApp.Views
         {
             this.InitializeComponent();
 
-            tbServerURL.Text = (string) roamingSettings.Values["serverURL"] ?? "";
-            tbAPIKey.Text = (string) roamingSettings.Values["apiKey"] ?? "";
+            HostnameValue.Text = (string) roamingSettings.Values["serverURL"] ?? "";
+            APIKeyValue.Text = (string) roamingSettings.Values["apiKey"] ?? "";
+            PortValue.Text = (string) roamingSettings.Values["port"] ?? "7878";
+            UseHTTPS.IsOn = (bool) roamingSettings.Values["https"] == true ? true : false;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            roamingSettings.Values["serverURL"] = tbServerURL.Text;
-            roamingSettings.Values["apiKey"] = tbAPIKey.Text;
+            int errors = 0;
 
-            SavedText.Visibility = Visibility.Visible;
+            if (APIKeyValue.Text == "")
+            {
+                APIKeyValue.BorderBrush = new SolidColorBrush(Windows.UI.Colors.Red);
+                SavedText.Visibility = Visibility.Visible;
+                SavedText.Text = "Please enter your Radarr API key.";
+                SavedText.Foreground = new SolidColorBrush(Windows.UI.Colors.Red);
+                return;
+            }
+
+            roamingSettings.Values["serverURL"] = HostnameValue.Text;
+            roamingSettings.Values["apiKey"] = APIKeyValue.Text;
+            roamingSettings.Values["https"] = UseHTTPS.IsOn;
+           
+            try
+            {
+                int.Parse(PortValue.Text);
+                roamingSettings.Values["port"] = PortValue.Text;
+            } catch (Exception)
+            {
+                errors += 1;
+            }
+
+            if (errors > 0)
+            {
+                PortValue.BorderBrush = new SolidColorBrush(Windows.UI.Colors.Red);
+                SavedText.Visibility = Visibility.Visible;
+                SavedText.Text = "Please enter a number in the port field.";
+                SavedText.Foreground = new SolidColorBrush(Windows.UI.Colors.Red);
+            } else
+            {
+                PortValue.BorderBrush = new SolidColorBrush(Windows.UI.Colors.DarkGray);
+                SavedText.Visibility = Visibility.Visible;
+                SavedText.Foreground = new SolidColorBrush(Windows.UI.Colors.Green);
+                SavedText.Text = "Your settings have been saved.";
+            }
+
         }
     }
 }

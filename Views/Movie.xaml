@@ -6,20 +6,64 @@
     xmlns:local1="using:RadarrSharp.Models"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:media="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     mc:Ignorable="d"
     Background="{ThemeResource SystemControlAcrylicWindowBrush}">
+    <Page.Resources>
+        <media:AcrylicBrush x:Key="CustomAcrylicBrush" BackgroundSource="Backdrop"
+            TintOpacity="0" TintColor="#FF000000" FallbackColor="#FF008000" />
+    </Page.Resources>
+    <ScrollViewer>
+        <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <RelativePanel x:Name="MovieInfo" Grid.Row="0" MaxHeight="650">
+            <RelativePanel.Background>
+                <ImageBrush ImageSource="{x:Bind movie.Images[1].Url}" Stretch="UniformToFill" >
+                </ImageBrush>
+            </RelativePanel.Background>
 
-    <RelativePanel x:Name="MovieInfo">
-        <TextBlock x:Name="MovieTitle" HorizontalAlignment="Left" Margin="40,40,0,0" FontSize="36" Text="{ x:Bind movie.Title }" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <StackPanel x:Name="MovieYear" RelativePanel.AlignLeftWith="MovieTitle"  RelativePanel.Below="MovieTitle" Orientation="Horizontal" Margin="40,10,0,0">
-            <SymbolIcon Symbol="Calendar"></SymbolIcon>
-            <TextBlock Text="{x:Bind movie.Year}" FontSize="16" Margin="20,0,0,0"></TextBlock>
-        </StackPanel>
-        <StackPanel RelativePanel.RightOf="MovieYear" RelativePanel.AlignBottomWith="MovieYear" Orientation="Horizontal" Margin="40,10,0,0">
-            <SymbolIcon Symbol="Download"></SymbolIcon>
-            <TextBlock Text="{ x:Bind GetMovieDownloadedStatus() }" FontSize="16" Margin="20,0,0,0"></TextBlock>
-        </StackPanel>
-        <TextBlock RelativePanel.Below="MovieYear" Margin="40,40,0,0" Text="{x:Bind movie.Overview }" MaxWidth="1280" TextWrapping="WrapWholeWords"/>
-        
-    </RelativePanel>
+            <Rectangle Fill="{ThemeResource CustomAcrylicBrush}" Stretch="UniformToFill"/>
+            <Image Height="260" Margin="40,40,0,0" Source="{x:Bind movie.Images[0].Url}"/>
+
+            <StackPanel Orientation="Vertical" Margin="0,167,0,0">
+                <TextBlock x:Name="MovieTitle" HorizontalAlignment="Left" Margin="40,160,0,10" FontSize="36" Text="{ x:Bind movie.Title }" TextWrapping="Wrap" VerticalAlignment="Top"/>
+                <Grid Margin="5,0,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="260"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel x:Name="MovieYear" HorizontalAlignment="Left" RelativePanel.Below="MovieTitle" Orientation="Horizontal" Margin="40,10,0,0" Width="100" Grid.Column="0">
+                        <SymbolIcon Symbol="Calendar"></SymbolIcon>
+                        <TextBlock Text="{x:Bind movie.Year}" FontSize="16" Margin="20,0,0,0"></TextBlock>
+                    </StackPanel>
+                    <StackPanel x:Name="Downloaded"  HorizontalAlignment="Left" RelativePanel.RightOf="MovieYear" Orientation="Horizontal" Margin="40,10,0,0" Width="260" Grid.Column="1">
+                        <SymbolIcon Symbol="Download"></SymbolIcon>
+                        <TextBlock Text="{ x:Bind GetMovieDownloadedStatus() }" FontSize="16" Margin="20,0,0,0"></TextBlock>
+                    </StackPanel>
+                </Grid>
+                <ScrollViewer VerticalScrollMode="Enabled">
+                    <TextBlock x:Name="Overview"  RelativePanel.Below="MovieYear" Margin="40,20,40,0" Text="{x:Bind movie.Overview }" MaxWidth="1920" TextWrapping="WrapWholeWords"/>
+                </ScrollViewer>
+            </StackPanel>
+        </RelativePanel>
+
+        <StackPanel Grid.Row="1" Margin="40,40,0,0">
+                <RelativePanel>
+                    <TextBlock x:Name="DateAddedDesc" Text="Date added: "></TextBlock>
+                    <TextBlock x:Name="DateAddedValue" RelativePanel.RightOf="DateAddedDesc" Margin="10,0,0,0" Text="{ x:Bind movie.Added }"></TextBlock>
+                </RelativePanel>
+                <RelativePanel>
+                    <TextBlock x:Name="QualityDesc" Text="Quality: "></TextBlock>
+                    <TextBlock x:Name="QualityValue" RelativePanel.RightOf="QualityDesc" Margin="10,0,0,0" Text="{ x:Bind movie.MovieFile.Quality.Quality.Name }"></TextBlock>
+                </RelativePanel>
+            </StackPanel>
+    </Grid>
+    </ScrollViewer>
 </Page>
+

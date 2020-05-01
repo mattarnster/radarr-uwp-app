@@ -20,7 +20,8 @@ namespace RadarrApp
         {
             this.InitializeComponent();
 
-            if (roamingSettings.Values["serverURL"] == null || (string) roamingSettings.Values["serverURL"] == "")
+            if (roamingSettings.Values["serverURL"] == null || (string) roamingSettings.Values["serverURL"] == ""
+                || roamingSettings.Values["apiKey"].ToString().Length != 32)
             {
                 NavigateToView("FirstRun", NavView);
             }

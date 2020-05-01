@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
+using RadarrApp.Services;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -25,14 +26,17 @@ namespace RadarrApp.Views
     /// </summary>
     public sealed partial class Movies : Page
     {
-        ApplicationDataContainer roamingSettings = Windows.Storage.ApplicationData.Current.RoamingSettings;
         RadarrSharp.RadarrClient radarrClient;
+        RadarrService radarrService = new RadarrService();
         private IList<RadarrSharp.Models.Movie> movies;
 
         public Movies()
         {
             this.InitializeComponent();
-            radarrClient = new RadarrSharp.RadarrClient((string)roamingSettings.Values["serverURL"], 7878, (string)roamingSettings.Values["apiKey"]);
+            this.NavigationCacheMode = NavigationCacheMode.Enabled;
+            this.DataContext = this;
+
+            radarrClient = radarrService.GetService();
 
             GetMovies();
         }
