@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -23,7 +24,9 @@ namespace RadarrApp.Views
     /// </summary>
     public sealed partial class Settings : Page
     {
-        ApplicationDataContainer roamingSettings = Windows.Storage.ApplicationData.Current.RoamingSettings;
+#pragma warning disable IDE0044 // Add readonly modifier
+        private ApplicationDataContainer roamingSettings = Windows.Storage.ApplicationData.Current.RoamingSettings;
+#pragma warning restore IDE0044 // Add readonly modifier
 
         public Settings()
         {
@@ -31,15 +34,19 @@ namespace RadarrApp.Views
 
             HostnameValue.Text = (string) roamingSettings.Values["serverURL"] ?? "";
             APIKeyValue.Text = (string) roamingSettings.Values["apiKey"] ?? "";
-            PortValue.Text = (string) roamingSettings.Values["port"] ?? "7878";
-            UseHTTPS.IsOn = (bool) roamingSettings.Values["https"] == true ? true : false;
+            PortValue.Text = (string) roamingSettings.Values["port"] ?? "";
+            
+            if ((bool)roamingSettings.Values["https"])
+            {
+                UseHTTPS.IsOn = true;
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             int errors = 0;
 
-            if (APIKeyValue.Text == "")
+            if (APIKeyValue.Text == "" || APIKeyValue.Text.Length != 32)
             {
                 APIKeyValue.BorderBrush = new SolidColorBrush(Windows.UI.Colors.Red);
                 SavedText.Visibility = Visibility.Visible;
@@ -56,7 +63,8 @@ namespace RadarrApp.Views
             {
                 int.Parse(PortValue.Text);
                 roamingSettings.Values["port"] = PortValue.Text;
-            } catch (Exception)
+            } 
+            catch (Exception)
             {
                 errors += 1;
             }
@@ -67,14 +75,42 @@ namespace RadarrApp.Views
                 SavedText.Visibility = Visibility.Visible;
                 SavedText.Text = "Please enter a number in the port field.";
                 SavedText.Foreground = new SolidColorBrush(Windows.UI.Colors.Red);
-            } else
+            } 
+            else
             {
                 PortValue.BorderBrush = new SolidColorBrush(Windows.UI.Colors.DarkGray);
+                APIKeyValue.BorderBrush = new SolidColorBrush(Windows.UI.Colors.DarkGray);
                 SavedText.Visibility = Visibility.Visible;
                 SavedText.Foreground = new SolidColorBrush(Windows.UI.Colors.Green);
                 SavedText.Text = "Your settings have been saved.";
+
+                Debug.WriteLine(Frame.Parent.GetType().FullName);
+
+                NavigationView navView = (NavigationView)Frame.Parent;
+
+                foreach (NavigationViewItem navItem in navView.MenuItems)
+                {
+                    navItem.IsEnabled = true;
+                }
+
             }
 
+        }
+
+        private void UseHTTPS_Toggled(object sender, RoutedEventArgs e)
+        {
+            var toggleSwitch = (ToggleSwitch)sender;
+            if (toggleSwitch.IsOn)
+            {
+                PortValue.Text = "443";
+                PortValue.IsEnabled = false;
+            }
+            else
+            {
+                PortValue.Text = "";
+                PortValue.IsEnabled = false;
+            }
+            
         }
     }
 }

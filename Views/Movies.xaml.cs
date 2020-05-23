@@ -22,7 +22,7 @@ using RadarrApp.Services;
 namespace RadarrApp.Views
 {
     /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// Movies page, lists all movies in the radarr library
     /// </summary>
     public sealed partial class Movies : Page
     {
@@ -48,12 +48,18 @@ namespace RadarrApp.Views
             {
                 foreach (var image in movie.Images)
                 {
-                    image.Url = "http://" + radarrClient.Host + ":" + radarrClient.Port + "/api" + image.Url + "?apikey=" + radarrClient.ApiKey;
+                    image.Url = (radarrClient.UseSsl ? "https://" : "http://") + radarrClient.Host + ":" + radarrClient.Port + "/api" + image.Url + "?apikey=" + radarrClient.ApiKey;
                 }
             }
+
             progressRing.IsActive = false;
             ContentGridView.ItemsSource = movies;
         }
+
+        //public string GetMoviePosterImage(RadarrSharp.Models.Movie movie)
+        //{
+           
+        //}
 
         private void ContentGridView_ItemClick(object sender, ItemClickEventArgs e)
         {

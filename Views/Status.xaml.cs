@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RadarrApp.Services;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -19,17 +20,19 @@ using Windows.UI.Xaml.Navigation;
 namespace RadarrApp.Views
 {
     /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// Status page - lists the version, path and branch of the service
     /// </summary>
     public sealed partial class Status : Page
     {
-        ApplicationDataContainer roamingSettings = Windows.Storage.ApplicationData.Current.RoamingSettings;
         RadarrSharp.RadarrClient radarrClient;
+        RadarrService radarrService;
         RadarrSharp.Models.SystemStatus systemStatus;
+
         public Status()
         {
             this.InitializeComponent();
-            radarrClient = new RadarrSharp.RadarrClient((string)roamingSettings.Values["serverURL"], 7878, (string)roamingSettings.Values["apiKey"]);
+            radarrService = new RadarrService();
+            radarrClient = radarrService.GetService();
             GetStatusDetails();
         }
 

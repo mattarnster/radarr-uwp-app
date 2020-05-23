@@ -23,6 +23,12 @@ namespace RadarrApp
             if (roamingSettings.Values["serverURL"] == null || (string) roamingSettings.Values["serverURL"] == ""
                 || roamingSettings.Values["apiKey"].ToString().Length != 32)
             {
+                roamingSettings.Values["https"] = false;
+               
+                foreach (NavigationViewItem navItem in NavView.MenuItems)
+                {
+                    navItem.IsEnabled = false;
+                }
                 NavigateToView("FirstRun", NavView);
             }
             else

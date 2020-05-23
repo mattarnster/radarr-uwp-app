@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:RadarrApp.Views"
     xmlns:local1="using:RadarrSharp.Models"
+    xmlns:local2="using:RadarrApp.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:media="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -12,6 +13,7 @@
     <Page.Resources>
         <media:AcrylicBrush x:Key="CustomAcrylicBrush" BackgroundSource="Backdrop"
             TintOpacity="0" TintColor="#FF000000" FallbackColor="#FF008000" />
+        <local2:MovieImageConverter x:Key="MovieImageConverter"/>
     </Page.Resources>
     <ScrollViewer>
         <Grid>
@@ -21,12 +23,12 @@
         </Grid.RowDefinitions>
         <RelativePanel x:Name="MovieInfo" Grid.Row="0" MaxHeight="650">
             <RelativePanel.Background>
-                <ImageBrush ImageSource="{x:Bind movie.Images[1].Url}" Stretch="UniformToFill" >
+                    <ImageBrush ImageSource="{x:Bind GetMovieBackgroundImage(), TargetNullValue=Assets/no-image-available.png}" Stretch="UniformToFill" >
                 </ImageBrush>
             </RelativePanel.Background>
 
             <Rectangle Fill="{ThemeResource CustomAcrylicBrush}" Stretch="UniformToFill"/>
-            <Image Height="260" Margin="40,40,0,0" Source="{x:Bind movie.Images[0].Url}"/>
+                <Image Height="260" Margin="40,40,0,0" Source="{x:Bind GetMoviePosterImage(), TargetNullValue=Assets/no-image-available.png}"/>
 
             <StackPanel Orientation="Vertical" Margin="0,167,0,0">
                 <TextBlock x:Name="MovieTitle" HorizontalAlignment="Left" Margin="40,160,0,10" FontSize="36" Text="{ x:Bind movie.Title }" TextWrapping="Wrap" VerticalAlignment="Top"/>

@@ -13,19 +13,19 @@
             <TextBlock HorizontalAlignment="Left" Text="Settings" FontSize="36" TextWrapping="Wrap" VerticalAlignment="Top"/>
             <StackPanel Margin="0,120,0,0" Orientation="Horizontal">
                 <TextBlock x:Name="HostnameDesc" Text="Hostname" Margin="0,4,0,0"></TextBlock>
-                <TextBox x:Name="HostnameValue" PlaceholderText="IP or Domain" Margin="40,0,0,0" Width="350"></TextBox>
+                <TextBox x:Name="HostnameValue" PlaceholderText="IP or Domain" Margin="40,0,0,0" Width="350"/>
             </StackPanel>
             <StackPanel Margin="0,180,0,0" Orientation="Horizontal">
                 <TextBlock x:Name="PortDesc" Text="Port" Margin="0,4,0,0"></TextBlock>
-                <TextBox x:Name="PortValue" Text="7878" Margin="79,0,0,0" Width="350"></TextBox>
+                <TextBox x:Name="PortValue" Text="" Margin="79,0,0,0" Width="350" PlaceholderText="7878"></TextBox>
             </StackPanel>
             <StackPanel Margin="0,240,0,0" Orientation="Horizontal">
                 <TextBlock x:Name="UseHTTPSDesc" Text="Use HTTPS" Margin="0,6,0,0"></TextBlock>
-                <ToggleSwitch x:Name="UseHTTPS" Margin="38,0,0,0"/>
+                <ToggleSwitch x:Name="UseHTTPS" Margin="38,0,0,0" Toggled="UseHTTPS_Toggled"/>
             </StackPanel>
             <StackPanel Margin="0,300,0,0" Orientation="Horizontal">
                 <TextBlock x:Name="APIKeyDesc" Text="API Key" Margin="0,4,0,0"></TextBlock>
-                <TextBox x:Name="APIKeyValue" Text="" Margin="59,0,0,0" Width="350"></TextBox>
+                <TextBox x:Name="APIKeyValue" Text="" Margin="59,0,0,0" Width="350" PlaceholderText="" MaxLength="37"></TextBox>
             </StackPanel>
             <Button Content="Save" Click="Button_Click" Margin="0,360,0,0" Height="36" Width="69"/>
             <TextBlock Name="SavedText" HorizontalAlignment="Left" Margin="0,420,0,0" Foreground="Green" Text="Your settings have been saved." TextWrapping="Wrap" VerticalAlignment="Top" Visibility="Collapsed"/>

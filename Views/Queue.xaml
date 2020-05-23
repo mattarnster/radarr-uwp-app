@@ -38,6 +38,8 @@
                     </DataTemplate>
                 </GridView.ItemTemplate>
             </GridView>
+            <TextBlock x:Name="sorryMessage" Text="Sorry, we couldn't fetch your queue." TextWrapping="Wrap" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignHorizontalCenterWithPanel="True" Visibility="Collapsed"/>
+            <TextBlock x:Name="noQueueItems" Text="There are no items in your queue." TextWrapping="Wrap" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" Visibility="Collapsed"/>
         </RelativePanel>
     </Grid>
 </Page>

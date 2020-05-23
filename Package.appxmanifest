@@ -7,15 +7,15 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="fe1af8d2-9aaf-4b7a-ab57-9631c2bd371f"
-    Publisher="CN=matta"
-    Version="1.0.0.0" />
+    Name="45510mattarnster.co.uk.RadarrApp"
+    Publisher="CN=ED6027D2-10B6-4B9D-9314-FAD5C1246ACE"
+    Version="1.0.4.0" />
 
-  <mp:PhoneIdentity PhoneProductId="fe1af8d2-9aaf-4b7a-ab57-9631c2bd371f" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="02bcc68f-05fb-498b-9138-c50c59d8081c" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>RadarrApp</DisplayName>
-    <PublisherDisplayName>matta</PublisherDisplayName>
+    <PublisherDisplayName>mattarnster</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
@@ -35,10 +35,11 @@
         DisplayName="RadarrApp"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png"
-        Description="RadarrApp"
+        Description="RadarrApp lets you view your Radarr library on your desktop."
         BackgroundColor="transparent">
-        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png"/>
-        <uap:SplashScreen Image="Assets\SplashScreen.png" />
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square71x71Logo="Assets\SmallTile.png" Square310x310Logo="Assets\LargeTile.png"/>
+        <uap:SplashScreen Image="Assets\SplashScreen.png"  BackgroundColor="#4b6982"/>
+        <uap:LockScreen BadgeLogo="Assets\BadgeLogo.png" Notification="badge"/>
       </uap:VisualElements>
     </Application>
   </Applications>

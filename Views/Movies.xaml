@@ -12,6 +12,7 @@
 
     <UserControl.Resources>
         <local2:MovieIsAvailableConverter x:Key="IsAvailableConverter"/>
+        <local2:MovieImageConverter x:Key="MovieImageConverter"/>
     </UserControl.Resources>
 
     <Grid>
@@ -30,7 +31,7 @@
             <GridView.ItemTemplate>
                 <DataTemplate x:Name="MovieTemplate" x:DataType="local1:Movie">
                     <StackPanel>
-                        <Image Stretch="UniformToFill" Source="{x:Bind Images[0].Url}" Width="167" Height="250" Margin="0,4,0,0"/>
+                        <Image Stretch="UniformToFill" Source="{Binding Images[0].Url, Converter={StaticResource MovieImageConverter }, FallbackValue=/Assets/no-image-available.png}" Width="167" Height="250" Margin="0,4,0,0"/>
                         <StackPanel Orientation="Vertical" Height="60" VerticalAlignment="Bottom" Padding="5,1,5,1" Background="Gray" Opacity=".85">
                             <TextBlock Text="{x:Bind Title}" 
                                        FontSize="16" 
