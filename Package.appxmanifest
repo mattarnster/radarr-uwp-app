@@ -9,9 +9,9 @@
   <Identity
     Name="45510mattarnster.co.uk.RadarrApp"
     Publisher="CN=ED6027D2-10B6-4B9D-9314-FAD5C1246ACE"
-    Version="1.0.4.0" />
+    Version="1.0.7.0" />
 
-  <mp:PhoneIdentity PhoneProductId="02bcc68f-05fb-498b-9138-c50c59d8081c" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="f12c9280-6240-4fee-a659-967058f2bd9e" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>RadarrApp</DisplayName>

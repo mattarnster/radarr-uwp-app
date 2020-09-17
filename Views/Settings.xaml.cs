@@ -1,4 +1,6 @@
-﻿using System;
+﻿using RadarrApp.Services;
+using RadarrSharp;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -7,6 +9,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -42,7 +45,7 @@ namespace RadarrApp.Views
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private async void Button_Click(object sender, RoutedEventArgs e)
         {
             int errors = 0;
 
@@ -78,6 +81,19 @@ namespace RadarrApp.Views
             } 
             else
             {
+                try
+                {
+                    RadarrService rs = new RadarrService();
+                    RadarrClient rc = rs.GetService();
+
+                    await rc.Movie.GetMovies();
+                } catch
+                {
+                    var dialog = new MessageDialog("There was an error testing your settings, please ensure the details entered are correct.", "Error testing connection");
+                    _ = await dialog.ShowAsync();
+                    return;
+                }
+
                 PortValue.BorderBrush = new SolidColorBrush(Windows.UI.Colors.DarkGray);
                 APIKeyValue.BorderBrush = new SolidColorBrush(Windows.UI.Colors.DarkGray);
                 SavedText.Visibility = Visibility.Visible;
