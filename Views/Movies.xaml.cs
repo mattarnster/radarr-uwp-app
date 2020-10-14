@@ -66,5 +66,11 @@ namespace RadarrApp.Views
             RadarrSharp.Models.Movie clickedMovie = (RadarrSharp.Models.Movie)e.ClickedItem;
             Frame.Navigate(typeof(RadarrApp.Views.Movie), clickedMovie, new EntranceNavigationTransitionInfo());
         }
+
+        private void Btn_Refresh_Click(object sender, RoutedEventArgs e)
+        {
+            progressRing.IsActive = true;
+            GetMovies();
+        }
     }
 }
