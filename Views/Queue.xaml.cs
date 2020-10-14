@@ -57,5 +57,11 @@ namespace RadarrApp.Views
                 progressRing.IsActive = false;
             }
         }
+
+        private void Btn_Refresh_Click(object sender, RoutedEventArgs e)
+        {
+            progressRing.IsActive = true;
+            GetQueue();
+        }
     }
 }
