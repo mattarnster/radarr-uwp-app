@@ -12,7 +12,14 @@
     <Grid>
         <ProgressRing Name="progressRing" Height="80" Width="97" IsActive="True"/>
         <RelativePanel>
-            <TextBlock x:Name="PageTitle" HorizontalAlignment="Left" Margin="40,40,0,0" FontSize="36" Text="Queue" TextWrapping="Wrap" VerticalAlignment="Top"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="40,40,0,0" >
+
+                <TextBlock FontSize="36" Text="Queue" TextWrapping="Wrap" VerticalAlignment="Bottom"/>
+                <Button x:Name="Btn_Refresh" VerticalAlignment="Bottom" BorderThickness="0" HorizontalAlignment="Center" Margin="20,0,0,0" 
+                    FontSize="22" FontFamily="Segoe MDL2 Assets" Content="&#xE72C;" Click="Btn_Refresh_Click" Padding="10"
+                    Background="Transparent" ToolTipService.ToolTip="Refresh" />
+            </StackPanel>
+            <!-- <TextBlock x:Name="PageTitle" HorizontalAlignment="Left" Margin="40,40,0,0" FontSize="36" Text="Queue" TextWrapping="Wrap" VerticalAlignment="Top"/> -->
             <GridView 
             x:Name="ContentGridView"
             IsItemClickEnabled="False"
